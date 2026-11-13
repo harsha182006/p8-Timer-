@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* 
+      #5D688A
+    #F7A5A5
+    #FFDBB6
+    #FFF2EF 
+    */
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color:#5D688A ;
+      }
+      .time{
+        color:#FFF2EF ;
+        font-size: 100px;
+        text-align: center;
+      }
+      button{
+        border-width: 0px;
+        width: 100px;
+        height: 30px;
+        border-radius: 5px;
+        background-color:#F7A5A5 ;
+        color:#5D688A;
+        font-weight: 500;
+        font-size: larger;
+        /* 
+     */
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1 id="time" class="time">Time</h1>
+      <button id="start">Start</button>
+      <button id="stop">Stop</button>
+      <button id="reset">Restart</button>
+    </div>
+  </body>
+  <script>
+    const time = document.getElementById("time");
+    const start = document.getElementById("start");
+    const stop = document.getElementById("stop");
+    const reset = document.getElementById("reset");
+    let h = 0;
+    let m = 0;
+    let s = 0;
+    let a = null;
+    start.addEventListener("click", () => {
+      if (a !== null) {
+        return;
+      }
+      a = setInterval(() => {
+        time.textContent = `${h}:${m}:${s}`;
+
+        console.log(h, ":", m, ":", s);
+        s++;
+        if (s === 60) {
+          m++;
+          s = 0;
+        }
+        if (m === 60) {
+          h++;
+          m = 0;
+          s = 0;
+        }
+      }, 1000);
+    });
+
+    stop.addEventListener("click", () => {
+      clearInterval(a);
+      a = null;
+    });
+    reset.addEventListener("click", () => {
+      clearInterval(a);
+      a = null;
+      s = 0;
+      m = 0;
+      h = 0;
+      time.textContent = `${h}:${m}:${s}`;
+    });
+  </script>
+</html>
